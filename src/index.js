@@ -1,7 +1,7 @@
 import { AppContainer } from 'react-hot-loader';
 import ReactDOM from 'react-dom';
 import React from 'react';
-import Header from './components/Header';
+import App from './components/App';
 
 const render = (Component) => {
   ReactDOM.render(
@@ -12,8 +12,8 @@ const render = (Component) => {
   );
 };
 
-render(Header);
+render(App);
 
 if (module.hot) {
-  module.hot.accept('./components/Header', () => { render(Header); });
+  module.hot.accept('./components/App', () => { render(App); });
 }

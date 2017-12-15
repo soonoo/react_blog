@@ -1,0 +1,23 @@
+.title_bar {
+  list-style-type: none;
+  padding: 0;
+  margin: 0 auto;
+  width: 1000px;
+  display: flex;
+  align-items: center; 
+  height: 50px;
+}
+
+li {
+  font-size: 1.7em;
+  margin-right: 20px;
+  color: black;
+}
+
+a, a:visited {
+  color: black;
+  text-decoration: none;
+}
+
+.links {
+}
