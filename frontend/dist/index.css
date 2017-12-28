@@ -1,0 +1,10 @@
+@font-face {
+  font-family: 'Nanum';
+  src: url('NanumSquareRoundOTFR.otf');
+}
+
+body { 
+  font-family: 'Nanum' !important;
+  margin: 0;
+  background: #efe1ce;
+}
