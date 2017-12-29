@@ -2,10 +2,13 @@ import React from 'react';
 import './Post.css';
 
 // eslint-disable-next-line
-const Post = ({ onClick, content }) => {
+const Post = ({ onClick, content, title }) => {
   return (
     // eslint-disable-next-line
-    <div className='post' onClick={onClick}>{content}</div>
+    <div className='post' onClick={onClick}>
+      <div className='post_title'>{title}</div>
+      <div className='post_contents'>{content}</div>
+    </div>
   );
 };
 

@@ -6,3 +6,11 @@
   font-family: 'Nanum' !important;
   height: 400px;
 }
+
+.post_button {
+  height: 40px;
+  width: 80px;
+  margin-top: 10px;
+  float: right;
+  cursor: pointer;
+}

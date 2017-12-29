@@ -1,0 +1,12 @@
+.input_post_title {
+  height: 40px;
+  width: 1000px;
+  box-sizing: border-box;
+  box-shadow: none;
+  font-size: 1.3em;
+  padding: 2px 7px;
+}
+
+.input_post_title:focus {
+  outline: none;
+}

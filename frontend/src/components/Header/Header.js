@@ -1,5 +1,6 @@
 import React from 'react';
 import { BlogTitle, BlogTopic } from 'Components';
+import './Header.css';
 
 const Header = () => {
   return (

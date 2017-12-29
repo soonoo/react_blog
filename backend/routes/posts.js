@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const bodyParser = require('body-parser');
 
 const mysql = require('mysql');
 const connection = mysql.createConnection({
@@ -9,9 +10,20 @@ const connection = mysql.createConnection({
   database: 'blog',
 });
 
-//connection.connect();
+connection.connect();
 
-router.post('/post', function(req, res) {
-  console.log(req.body);
-  res.status(200).send('successssssss');
+
+
+router.use(bodyParser.json());
+router.use(bodyParser.urlencoded({ extended: true }));
+
+router.post('/', function(req, res) {
+  console.log(req.body.contents);
+  res.set({
+    'Access-Control-Allow-Origin': '*',
+  });
+  connection.query('INSERT INTO POSTS(TITLE, CONTENTS) VALUES(?, ?)', [ req.body.title, req.body.contents ]);
+  res.send(req.body);
 });
+
+module.exports = router;
