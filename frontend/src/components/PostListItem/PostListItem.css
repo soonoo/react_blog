@@ -1,0 +1,18 @@
+.item_title {
+  padding: 10px 0px;
+  font-size: 2.6em;
+  text-decoration: underline;
+}
+
+.item_title:visited {
+  color: blue;
+}
+
+.item_date {
+  font-size: 1.4em;
+}
+
+.item_list {
+  margin: 0 0 40px;
+  font-size: 1em;
+}

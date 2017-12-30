@@ -8,10 +8,10 @@ export function requestPosts() {
 }
 
 export const RECEIVE_POSTS = 'RECEIVE_POSTS';
-export function receivePosts(json) {
+export function receivePosts(response) {
   return {
     type: RECEIVE_POSTS,
-    posts: json,
+    response,
   };
 }
 
@@ -19,17 +19,8 @@ export function fetchPosts() {
   return (dispatch) => {
     dispatch(requestPosts());
 
-    return fetch('https://www.reddit.com/r/frontend.json')
-      .then((response) => { return response.json(); })
-      .then((json) => { return dispatch(receivePosts(json.data.children[0].data.domain)); });
-  };
-}
-
-export const CHANGE_EDITOR_CONTENTS = 'CHANGE_EDITOR_CONTENTS';
-export function changeContents(text) {
-  return {
-    type: CHANGE_EDITOR_CONTENTS,
-    editorContents: text,
+    return axios.get('http://localhost:3000/api/post/list')
+      .then((response) => { dispatch(receivePosts(response)); });
   };
 }
 
