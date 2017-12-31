@@ -1,14 +1,20 @@
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import React from 'react';
-import { HomePage, WritePage } from 'Pages';
-
+import { HomePage, WritePage, PostPage } from 'Pages';
+import { Header } from 'Components';
 
 const App = () => {
   return (
     <Router>
       <div>
-        <Route exact path='/' component={HomePage} />
-        <Route path='/write' component={WritePage} />
+        <Header />
+        <div>
+          <Switch>
+            <Route exact path='/' component={HomePage} />
+            <Route exact path='/write' component={WritePage} />
+            <Route path='/:postId' component={PostPage} />
+          </Switch>
+        </div>
       </div>
     </Router>
   );

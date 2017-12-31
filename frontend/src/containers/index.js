@@ -1,4 +1,4 @@
-import PostContainer from './PostContainer';
 import QuillContainer from './QuillContainer';
 
-export { PostContainer, QuillContainer };
+// eslint-disable-next-line
+export { QuillContainer };

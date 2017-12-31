@@ -35,7 +35,8 @@ router.use(function(req, res, next) {
 
 router.post('/', function (req, res) {
   promiseQuery('INSERT INTO POSTS(TITLE, CONTENTS) VALUES(?, ?)', [req.body.title, req.body.contents])
-    .then(res.send(req.body));
+    .then(res.status(200).end())
+    .catch(e => console.log(e));
 });
 
 router.get('/list/:id?', function (req, res) {
@@ -47,25 +48,27 @@ router.get('/list/:id?', function (req, res) {
     listId = parseInt(listId);
 
     promiseQuery('SELECT id, title, contents, post_date FROM POSTS ORDER BY ID DESC LIMIT ?, 10', [10 * (listId - 1)])
-      .then(rows => {
-        rows.map(row => {
-          row.post_date = [row.post_date.getFullYear(), row.post_date.getMonth(), row.post_date.getDay()].join('. ');
-        });
-        return rows;
-      })
-      .then(rows => res.send(rows))
-      .catch(e => console.log(e));
+    .then(rows => {
+      rows.map(row => {
+        row.post_date = [row.post_date.getFullYear(), row.post_date.getMonth(), row.post_date.getDay()].join('. ');
+      });
+      return rows;
+    })
+    .then(rows => res.send(rows))
+    .catch(e => console.log(e));
   }
 });
 
 router.get('/recent', function(req, res) {
-  res.set({
-    'Access-Control-Allow-Origin': '*',
-  });
-  
   promiseQuery('SELECT * FROM POSTS ORDER BY ID DESC LIMIT 1')
-    .then(rows => res.send(rows))
-    .catch(e => console.log(e));
+  .then(rows => res.send(rows))
+  .catch(e => console.log(e));
+});
+
+router.get('/:id', function(req, res) {
+  promiseQuery('SELECT id, title, contents, post_date FROM POSTS WHERE id = ?', [ req.params.id ])
+  .then(rows => res.send(rows))
+  .catch(e => console.log(e));
 });
 
 module.exports = router;

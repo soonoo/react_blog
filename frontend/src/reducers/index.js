@@ -1,20 +1,20 @@
 /* eslint-disable */
 import { combineReducers } from 'redux';
 import {
-  REQUEST_POSTS, RECEIVE_POSTS, RECEIVE_WRITE, REQUEST_WRITE,
+  REQUEST_POST_LIST, RECEIVE_POST_LIST, RECEIVE_WRITE, REQUEST_WRITE, REQUEST_POST, RECEIVE_POST,
 } from 'Actions';
 
-function postGetReducer(state, action) {
+function postListReducer(state = [], action) {
   switch (action.type) {
-    case RECEIVE_POSTS:
+    case RECEIVE_POST_LIST:
       return action.response.data;
-    case REQUEST_POSTS:
+    case REQUEST_POST_LIST:
     default:
       return state;
   }
 }
 
-function postWriteReducer(state, action) {
+function postWriteReducer(state = 0, action) {
   switch(action.type) {
     case RECEIVE_WRITE:
       return action.response;
@@ -24,12 +24,21 @@ function postWriteReducer(state, action) {
   }
 }
 
-export const combinedReducer = function(state = { editorContents: '', posts: []}, action) {
-  return {
-    response: postWriteReducer(state.editorContents, action),
-    posts: postGetReducer(state.posts, action),
-  };
-};
+function postReducer(state = {}, action) {
+  switch(action.type) {
+    case RECEIVE_POST:
+      return action.response.data[0];
+    case REQUEST_POST:
+    default:
+      return state;
+  }
+}
+
+export const rootReducer = combineReducers({
+  response: postWriteReducer,
+  postList: postListReducer,
+  post: postReducer,
+});
 
 // eslint-disable-next-line
 export const logger = store => next => action => {

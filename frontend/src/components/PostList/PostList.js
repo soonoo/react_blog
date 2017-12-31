@@ -6,7 +6,7 @@ import './PostList.css';
 
 const PostList = ({ posts }) => {
   const postItems = posts.map((item) => {
-    return <PostListItem key={item.id} title={item.title} date={item.post_date} />;
+    return <PostListItem key={item.id} postId={item.id} title={item.title} date={item.post_date} />;
   });
 
   return (
@@ -22,12 +22,16 @@ PostList.propTypes = {
     title: PropTypes.string,
     contents: PropTypes.string,
     post_date: PropTypes.string,
-  })).isRequired,
+  })),
+};
+
+PostList.defaultProps = {
+  posts: [],
 };
 
 const mapStateToProps = (state) => {
   return {
-    posts: state.posts,
+    posts: state.postList,
   };
 };
 
