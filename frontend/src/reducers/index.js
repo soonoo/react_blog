@@ -1,7 +1,7 @@
 /* eslint-disable */
 import { combineReducers } from 'redux';
 import {
-  REQUEST_POST_LIST, RECEIVE_POST_LIST, RECEIVE_WRITE, REQUEST_WRITE, REQUEST_POST, RECEIVE_POST,
+  REQUEST_POST_LIST, RECEIVE_POST_LIST, RECEIVE_WRITE, REQUEST_WRITE, REQUEST_POST, RECEIVE_POST, UNMOUNT_WRITE
 } from 'Actions';
 
 function postListReducer(state = [], action) {
@@ -14,10 +14,20 @@ function postListReducer(state = [], action) {
   }
 }
 
-function postWriteReducer(state = 0, action) {
+function postWriteReducer(state = { status: false, postId: -1 }, action) {
   switch(action.type) {
+    case UNMOUNT_WRITE:
+      return {
+        status: false,
+        postId: -1,
+      };
     case RECEIVE_WRITE:
-      return action.response;
+      if(action.response.status === 200) {
+        return {
+          status: true,
+          postId: action.response.data.id,
+        };
+      }
     case REQUEST_WRITE:
     default:
       return state;
@@ -35,7 +45,7 @@ function postReducer(state = {}, action) {
 }
 
 export const rootReducer = combineReducers({
-  response: postWriteReducer,
+  postWrite: postWriteReducer,
   postList: postListReducer,
   post: postReducer,
 });

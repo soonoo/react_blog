@@ -35,7 +35,7 @@ router.use(function(req, res, next) {
 
 router.post('/', function (req, res) {
   promiseQuery('INSERT INTO POSTS(TITLE, CONTENTS) VALUES(?, ?)', [req.body.title, req.body.contents])
-    .then(res.status(200).end())
+    .then(rows => res.send({ id: rows.insertId }))
     .catch(e => console.log(e));
 });
 
@@ -55,7 +55,10 @@ router.get('/list/:id?', function (req, res) {
       return rows;
     })
     .then(rows => res.send(rows))
-    .catch(e => console.log(e));
+    .catch(e => {
+      console.log(e)
+      res.status(500).end();
+    });
   }
 });
 

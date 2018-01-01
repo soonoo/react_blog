@@ -15,12 +15,15 @@ export function receivePost(response) {
   };
 }
 
-export function fetchPost(postId) {
+export function fetchPost(postId, editHtml) {
   return (dispatch) => {
     dispatch(requestPost());
 
     return axios.get(`http://localhost:3000/api/post/${postId}`)
-      .then((response) => { dispatch(receivePost(response)); });
+      .then((response) => {
+        dispatch(receivePost(response));
+        editHtml();
+      });
   };
 }
 
@@ -77,6 +80,13 @@ export function writePost(contents, title) {
         'Content-Type': 'application/x-www-form-urlencoded',
       },
     })
-      .then((response) => { dispatch(receiveWrite(response.status)); });
+      .then((response) => { dispatch(receiveWrite(response)); });
+  };
+}
+
+export const UNMOUNT_WRITE = 'UNMOUNT_WRITE';
+export function unmountWrite() {
+  return {
+    type: UNMOUNT_WRITE,
   };
 }

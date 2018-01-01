@@ -7,7 +7,7 @@ const PostTitleInput = ({ titleInputRef }) => {
 };
 
 PostTitleInput.propTypes = {
-  titleInputRef: PropTypes.element.isRequired,
+  titleInputRef: PropTypes.func.isRequired,
 };
 
 export default PostTitleInput;
