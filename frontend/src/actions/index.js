@@ -1,5 +1,8 @@
 import axios from 'axios';
 
+const env = process.env.NODE_ENV || 'dev';
+const url = env === 'prod' ? '' : 'http://localhost:3000';
+
 export const REQUEST_POST = 'REQUEST_POST';
 export function requestPost() {
   return {
@@ -19,7 +22,7 @@ export function fetchPost(postId, editHtml) {
   return (dispatch) => {
     dispatch(requestPost());
 
-    return axios.get(`http://localhost:3000/api/post/${postId}`)
+    return axios.get(`${url}/${postId}`)
       .then((response) => {
         dispatch(receivePost(response));
         editHtml();
@@ -46,7 +49,7 @@ export function fetchPostList() {
   return (dispatch) => {
     dispatch(requestPostList());
 
-    return axios.get('http://localhost:3000/api/post/list')
+    return axios.get(`${url}/api/post/list`)
       .then((response) => { dispatch(receivePostList(response)); });
   };
 }
@@ -75,7 +78,7 @@ export function writePost(contents, title) {
     params.append('contents', contents);
     params.append('title', title);
 
-    return axios.post('http://localhost:3000/api/post', params, {
+    return axios.post(`${url}/api/post`, params, {
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
       },

@@ -1,6 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
-const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
   entry: [
@@ -30,19 +30,30 @@ module.exports = {
     rules: [
       {
         test: /\.js$/,
-        enforce: "pre",
-        loader: "eslint-loader"
+        enforce: 'pre',
+        loader: 'eslint-loader'
       },
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loader: "babel-loader"
+        loader: 'babel-loader'
       },
       {
         test: /\.css$/,
-        use: [ 'style-loader', 'css-loader' ]
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: 'css-loader'
+        })
       },
+      {
+        test: /\.otf$/,
+        use: [
+          'file-loader',
+        ],
+      }
     ]
   },
-
+  plugins: [
+    new ExtractTextPlugin('style.css'),
+  ]
 };

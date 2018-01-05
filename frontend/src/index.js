@@ -6,6 +6,7 @@ import ReactDOM from 'react-dom';
 import React from 'react';
 import App from './components/App';
 import { rootReducer, logger } from './reducers';
+import './index.css';
 
 const store = createStore(rootReducer, applyMiddleware(thunkMiddleware, logger));
 
