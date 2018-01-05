@@ -1,5 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = {
   entry: [
@@ -12,6 +13,7 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     publicPath: '/',
   },
+
   resolve: {
     modules: [ 'node_modules' ],
     alias: {
@@ -43,13 +45,4 @@ module.exports = {
     ]
   },
 
-  devServer: {
-    contentBase: './dist',
-    hot: true
-  },
-
-  plugins: [
-    new webpack.NamedModulesPlugin(),
-    new webpack.HotModuleReplacementPlugin()
-  ]
 };
