@@ -2,11 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { PostListItem } from 'Components';
+import { Link } from 'react-router-dom';
 import './PostList.css';
 
 const PostList = ({ posts }) => {
   const postItems = posts.map((item) => {
-    return <PostListItem key={item.id} postId={item.id} title={item.title} date={item.post_date} />;
+    return (
+      <Link to={`/${item.id}`}>
+        <PostListItem key={item.id} postId={item.id} title={item.title} date={item.post_date} />
+      </Link>
+    );
   });
 
   return (
