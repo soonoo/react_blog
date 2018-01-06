@@ -1,0 +1,13 @@
+h1 {
+  text-align: center;
+  font-size: 3.6em;
+  width: 1000px;
+  padding: auto 0; 
+  margin: 0 auto;
+  box-sizing: border-box;
+  padding-top: 50px;
+}
+
+header {
+  height: 130px;
+}
