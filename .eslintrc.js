@@ -7,7 +7,8 @@ module.exports = {
         "arrow-body-style": ["error", "always"],
         "jsx-quotes": ["error", "prefer-single"],
         "jsx-a11y/anchor-is-valid": ["off"],
-        "linebreak-style": ["off"]
+        "linebreak-style": ["off"],
+        "no-restricted-globals": ["warn"],
     },
     "env": {
         "browser": true
